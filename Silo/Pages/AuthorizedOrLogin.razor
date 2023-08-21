@@ -1,7 +1,7 @@
-﻿<AuthorizeView>
-    <Authorized>
+﻿@*<AuthorizeView>
+    <Authorized>*@
         @ChildContent
-    </Authorized>
+    @*</Authorized>
     <NotAuthorized>
         <MudText Typo="Typo.body1">
             You're not logged in. To view this page, log in.
@@ -12,7 +12,7 @@
             Log In
         </MudButton>
     </NotAuthorized>
-</AuthorizeView>
+</AuthorizeView>*@
 
 @code {
     [Parameter, EditorRequired]

@@ -21,32 +21,32 @@ public sealed class Startup
     {
         services.AddMudServices();
 
-        services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApp(
-            options =>
-            {
-                _configuration.Bind("AzureAdB2C", options);
+        //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+        //        .AddMicrosoftIdentityWebApp(
+        //    options =>
+        //    {
+        //        _configuration.Bind("AzureAdB2C", options);
 
-                static void ConfigCookies(params CookieBuilder[] cookies)
-                {
-                    foreach (var cookie in cookies)
-                    {
-                        cookie.SameSite = SameSiteMode.None;
-                        cookie.SecurePolicy = CookieSecurePolicy.Always;
-                        cookie.IsEssential = true;
-                    }
-                }
+        //        static void ConfigCookies(params CookieBuilder[] cookies)
+        //        {
+        //            foreach (var cookie in cookies)
+        //            {
+        //                cookie.SameSite = SameSiteMode.None;
+        //                cookie.SecurePolicy = CookieSecurePolicy.Always;
+        //                cookie.IsEssential = true;
+        //            }
+        //        }
 
-                ConfigCookies(options.NonceCookie, options.CorrelationCookie);
-            },
-            subscribeToOpenIdConnectMiddlewareDiagnosticsEvents: true);
+        //        ConfigCookies(options.NonceCookie, options.CorrelationCookie);
+        //    },
+        //    subscribeToOpenIdConnectMiddlewareDiagnosticsEvents: true);
 
-        services.AddControllersWithViews()
-            .AddMicrosoftIdentityUI();
+        services.AddControllersWithViews();
+            //.AddMicrosoftIdentityUI();
 
         services.AddRazorPages();
-        services.AddServerSideBlazor()
-            .AddMicrosoftIdentityConsentHandler();
+        services.AddServerSideBlazor();
+            //.AddMicrosoftIdentityConsentHandler();
 
         services.AddHttpContextAccessor();
         services.AddSingleton<ShoppingCartService>();
@@ -83,7 +83,7 @@ public sealed class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseAuthentication();
+        //app.UseAuthentication();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();

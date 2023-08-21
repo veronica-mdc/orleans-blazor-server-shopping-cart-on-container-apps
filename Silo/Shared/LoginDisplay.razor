@@ -2,19 +2,19 @@
 @using Microsoft.Extensions.Options
 @inject IOptionsMonitor<MicrosoftIdentityOptions> microsoftIdentityOptions
 
-<AuthorizeView>
-    <Authorized>
+@*<AuthorizeView>
+    <Authorized>*@
         <MudMenu Dense=true AnchorOrigin="Origin.BottomLeft"
             TransformOrigin="Origin.BottomCenter"
             Size="Size.Large" LockScroll=true Class="rounded-pill ml-2">
             <ActivatorContent>
                 <MudAvatar Color="Color.Secondary" Variant="Variant.Filled">
-                    @(context.User?.Identity?.Name?.ToUpper()?[0])
+                    TU
                 </MudAvatar>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Disabled=true>
-                    <b style="color: var(--mud-palette-secondary)">@(context.User?.Identity?.Name)</b>
+                    <b style="color: var(--mud-palette-secondary)">Test User</b>
                 </MudMenuItem>
                 @if (_canEditProfile)
                 {
@@ -27,14 +27,14 @@
                 </MudMenuItem>
             </ChildContent>
         </MudMenu>
-    </Authorized>
+    @*</Authorized>
     <NotAuthorized>
         <MudIconButton Icon="@Icons.Filled.Login"
             Color="Color.Inherit" Size="Size.Large"
             Href="MicrosoftIdentity/Account/SignIn" DisableElevation=true
             Title="Login" Class="rounded-pill" />
     </NotAuthorized>
-</AuthorizeView>
+</AuthorizeView>*@
 
 @code {
     private bool _canEditProfile;

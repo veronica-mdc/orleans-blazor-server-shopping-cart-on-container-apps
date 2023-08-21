@@ -1,10 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT License.
 
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Rewrite;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
 
 namespace Orleans.ShoppingCart.Silo;
 

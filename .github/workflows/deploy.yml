@@ -8,7 +8,7 @@ on:
 env:
   UNIQUE_APP_NAME: orleanscart
   SILO_IMAGE_NAME: orleanscart-silo
-  AZURE_RESOURCE_GROUP_NAME: orleans-resourcegroup
+  AZURE_RESOURCE_GROUP_NAME: rg-test-veronica
   AZURE_RESOURCE_GROUP_LOCATION: eastus
 
 jobs:

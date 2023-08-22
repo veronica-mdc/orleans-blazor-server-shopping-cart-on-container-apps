@@ -54,6 +54,11 @@ public sealed class Startup
         services.AddLocalStorageServices();
         services.AddApplicationInsights("Silo");
         services.AddLogging();
+        services.AddApplicationInsightsTelemetry(opt =>
+        {
+            opt.EnableAdaptiveSampling = false;
+            opt.ConnectionString = "InstrumentationKey=25caf9b2-9e8e-4330-9a0e-3c62e64b46fc;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/";
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

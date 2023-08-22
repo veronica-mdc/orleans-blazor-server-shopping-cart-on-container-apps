@@ -1,5 +1,6 @@
 param operationalInsightsName string
 param appInsightsName string
+param virtualNetworkName string
 param location string
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -26,6 +27,26 @@ resource logs 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
   }
 }
 
+resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
+  name: virtualNetworkName
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        '10.0.0.0/16'
+      ]
+    }
+    subnets: [
+      {
+        name: 'subnet1'
+        properties: {
+          addressPrefix: '10.0.0.0/23'
+        }
+      }
+    ]
+  }
+}
+
 resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
   name: '${resourceGroup().name}env'
   location: location
@@ -36,6 +57,9 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
         customerId: logs.properties.customerId
         sharedKey: logs.listKeys().primarySharedKey
       }
+    }
+    vnetConfiguration: {
+        infrastructureSubnetId: vnet.properties.subnets[0].id
     }
   }
 }

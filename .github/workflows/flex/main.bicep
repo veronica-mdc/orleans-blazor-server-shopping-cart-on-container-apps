@@ -13,6 +13,7 @@ module env 'environment.bicep' = {
     location: location
     operationalInsightsName: '${appName}-logs'
     appInsightsName: '${appName}-insights'
+    virtualNetworkName: '${appName}-vnet'
   }
 }
 

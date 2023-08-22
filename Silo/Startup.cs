@@ -53,6 +53,7 @@ public sealed class Startup
         services.AddSingleton<ToastService>();
         services.AddLocalStorageServices();
         services.AddApplicationInsights("Silo");
+        services.AddLogging();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

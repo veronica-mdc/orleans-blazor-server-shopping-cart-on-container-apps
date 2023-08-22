@@ -1,23 +1,32 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.Extensions.Logging;
+using Orleans.Runtime;
+
 namespace Orleans.ShoppingCart.Grains;
 
 [Reentrant]
 public sealed class ShoppingCartGrain : Grain, IShoppingCartGrain
 {
     private readonly IPersistentState<Dictionary<string, CartItem>> _cart;
+    private readonly ILogger<ShoppingCartGrain> _logger;
 
     public ShoppingCartGrain(
         [PersistentState(
             stateName: "ShoppingCart",
             storageName: "shopping-cart")]
-        IPersistentState<Dictionary<string, CartItem>> cart) => _cart = cart;
+        IPersistentState<Dictionary<string, CartItem>> cart,
+        ILogger<ShoppingCartGrain> logger)
+    {
+        _cart = cart;
+        _logger = logger;
+    }
 
     async Task<bool> IShoppingCartGrain.AddOrUpdateItemAsync(int quantity, ProductDetails product)
     {
         var products = GrainFactory.GetGrain<IProductGrain>(product.Id);
-   
+
         int? adjustedQuantity = null;
         if (_cart.State.TryGetValue(product.Id, out var existingItem))
         {
@@ -44,8 +53,11 @@ public sealed class ShoppingCartGrain : Grain, IShoppingCartGrain
         return _cart.ClearStateAsync();
     }
 
-    Task<HashSet<CartItem>> IShoppingCartGrain.GetAllItemsAsync() =>
-        Task.FromResult(_cart.State.Values.ToHashSet());
+    Task<HashSet<CartItem>> IShoppingCartGrain.GetAllItemsAsync()
+    {
+        _logger.LogWarning("Fetched all items");
+        return Task.FromResult(_cart.State.Values.ToHashSet());
+    }
 
     Task<int> IShoppingCartGrain.GetTotalItemsInCartAsync() =>
         Task.FromResult(_cart.State.Count);

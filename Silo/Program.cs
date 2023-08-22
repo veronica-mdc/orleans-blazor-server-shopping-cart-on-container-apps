@@ -4,7 +4,7 @@
 await Host.CreateDefaultBuilder(args)
     .ConfigureLogging(builder =>
     {
-        builder.AddApplicationInsights("de90cc02-3769-4f07-b1e2-378f0bf1f8b8");
+        builder.AddApplicationInsights("25caf9b2-9e8e-4330-9a0e-3c62e64b46fc");
     })
     .UseOrleans(
         (context, builder) =>

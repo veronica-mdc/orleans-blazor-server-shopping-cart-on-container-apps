@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 
 await Host.CreateDefaultBuilder(args)
+    .ConfigureLogging(builder =>
+    {
+        builder.AddApplicationInsights("de90cc02-3769-4f07-b1e2-378f0bf1f8b8");
+    })
     .UseOrleans(
         (context, builder) =>
         {

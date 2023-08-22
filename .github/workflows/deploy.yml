@@ -6,7 +6,7 @@ on:
     - main
 
 env:
-  UNIQUE_APP_NAME: orleanscartveronica
+  UNIQUE_APP_NAME: orleanscartvjc
   SILO_IMAGE_NAME: orleanscart-silo
   AZURE_RESOURCE_GROUP_NAME: rg-test-veronica
   AZURE_RESOURCE_GROUP_LOCATION: eastus
